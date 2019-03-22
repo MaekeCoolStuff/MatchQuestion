@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Matchvraag</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+    <div id="container">
+        <h2>Matchvraag</h2>
+        <div class="row">
+            <div id="match-containers" class="col-xs-6">
+                <div class="row">
+                    <div class="match-container col-xs-10">
+                        <div class="title">Confucius</div>
+                        <div class="dropzone" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+                    </div>
+                    <div class="match-container col-xs-10">
+                        <div class="title">Dakota Johnson</div>
+                        <div class="dropzone" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+                    </div>
+                    <div class="match-container col-xs-10">
+                        <div class="title">Jane Goodall</div>
+                        <div class="dropzone" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+                    </div>
+                    <div class="match-container col-xs-10">
+                        <div class="title">Elon Musk</div>
+                        <div class="dropzone" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="match-childs" class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10 match-child-container" ondragleave="dragLeave(event)"  ondragover="allowDrop(event)" ondrop="drop(event)">
+                        <div class="match-child" draggable="true" ondragstart="drag(event)" id="drag1">
+                            I want my outfit to match my mood.
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10 match-child-container" ondragleave="dragLeave(event)" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        <div class="match-child" draggable="true" ondragstart="drag(event)" id="drag2">
+                            Brand is just a perception, and perception will match reality over time. Sometimes it will be ahead, other times it will be behind. But brand is simply a collective impression some have about a product.
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10 match-child-container" ondragleave="dragLeave(event)" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        <div class="match-child" draggable="true" ondragstart="drag(event)" id="drag3">
+                            A gentleman would be ashamed should his deeds not match his words.
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10 match-child-container" ondragleave="dragLeave(event)" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        <div class="match-child" draggable="true" ondragstart="drag(event)" id="drag4">
+                            What you do makes a difference, and you have to decide what kind of difference you want to make.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+h2 {
+    margin-bottom: 50px;
+}
+
+#container {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.match-container {
+    margin-bottom: 15px;
+}
+
+.match-container .title {
+    background-color: #397cc6;
+    color: #fff;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.match-container .dropzone {
+    min-height: 150px;
+    border: 1px dashed #565656;
+    border-top: none;
+}
+
+.match-child-container {
+    min-height: 150px;
+    margin-bottom: 15px;
+    background: #efefef;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.match-child {
+    min-height: 150px;
+    margin-bottom: 15px;
+    background: #efefef;
+    cursor: pointer;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.match-child:hover {
+    border: 2px dashed #565656;
+}
+
+.over {
+    border: 2px dashed #565656;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "pixi-platformer-game",
+  "version": "1.0.0",
+  "description": "A platformer game made with pixi",
+  "main": "index.js",
+  "dependencies": {
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1",
+    "webpack": "^4.29.6"
+  },
+  "devDependencies": {
+    "@types/pixi.js": "^4.8.6",
+    "awesome-typescript-loader": "^5.2.1",
+    "html-webpack-plugin": "^3.2.0",
+    "pixi.js": "^5.0.0-rc.2",
+    "typescript": "^3.3.3333"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaekeCoolStuff/pixi-platformer-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaekeCoolStuff/pixi-platformer-game/issues"
+  },
+  "homepage": "https://github.com/MaekeCoolStuff/pixi-platformer-game#readme"
+}
