@@ -21,7 +21,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'PIXI.js Platformer Test'
+            title: 'Match vraag'
         })
     ]
 };

@@ -1,11 +1,14 @@
-import { Sprite, Graphics, Text } from "pixi.js";
-import { CollisionService } from "./collision-service";
+import { Sprite, Graphics, Text, Container } from "pixi.js";
+import { MatchCollisionService } from "./match-collision-service";
+import { MatchItemContainer } from "./match-item-container";
+import { MatchContainer } from "./match-container";
 
 export class MatchItem extends Sprite {
     public data: any;
     public dragging: boolean;
+    public container: MatchItemContainer | MatchContainer;
 
-    constructor(public text: string) {
+    constructor(public text: string, public stage: Container) {
         super();
         this.setup();
     }
@@ -50,9 +53,12 @@ export class MatchItem extends Sprite {
 
     onDragStart(event) {
         this.data = event.data;
+        this.stage.addChild(this);
         let position = this.data.getLocalPosition(this);
         this.pivot.set(position.x, position.y)
-        //this.position.set(this.data.global.x, this.data.global.y)
+        this.position.set(this.data.global.x, this.data.global.y)
+
+        
     
         this.alpha = 0.5;
         this.dragging = true;
@@ -61,13 +67,23 @@ export class MatchItem extends Sprite {
     onDragEnd() {
         this.alpha = 1;
         this.dragging = false;
-        var newPosition = this.data.getLocalPosition(this.parent.parent);
-        console.log('newPosition.x', newPosition.x, newPosition.y)
-        let hasCollided = CollisionService.checkForCollisions(newPosition.x, newPosition.y, this.text);
+        //var newPosition = {this.data.getLocalPosition(this.parent.parent);}
+        let newPosition = {
+            x: this.data.global.x,
+            y: this.data.global.y
+        };
+
+        console.log(newPosition);
+
+        let hasCollided = MatchCollisionService.checkForMatchContainerCollisions(newPosition.x, newPosition.y, this);
+        MatchCollisionService.checkForMatchItemContainerCollisions(newPosition.x, newPosition.y, this);
         this.data = null;        
 
         if(hasCollided) {
-            this.visible = false;
+            // this.x = 0;
+            // this.y = 0;
+            // this.pivot.set(0, 0);
+            //this.visible = false;
         }
     }
 
@@ -77,9 +93,5 @@ export class MatchItem extends Sprite {
             this.position.x = newPosition.x;
             this.position.y = newPosition.y;
         }
-    }
-
-    makeInvisible() {
-        this.visible = false;
     }
 }

@@ -1,8 +1,10 @@
 import { Sprite, Graphics, Text } from "pixi.js";
+import { MatchItem } from "./match-item";
 
 export class MatchContainer extends Sprite {
 
     box: Graphics;
+    matchItem: MatchItem;
 
     constructor(public title: string, public x: number, public y: number) {
         super();
@@ -45,24 +47,20 @@ export class MatchContainer extends Sprite {
         //this.getBounds().contains()
     }
 
-    setText(title) {        
-        let message = new Text(title, {
-            fill: '0x565656',
-            fontSize: 16,
-            wordWrap: true,
-            wordWrapWidth: 270
-        });
-        message.x = 20;
-        message.y = 50;
+    setMatchItem(matchItem: MatchItem) {
+        console.log('setMatchItem');
+        let heightOfMatchItem = matchItem.height;
 
-        let heightOfMessage = message.height;
-
-        let newHeight = heightOfMessage + 60;
+        let newHeight = heightOfMatchItem + 60;
 
         if(newHeight > 140) {
             this.box.height = newHeight;
         }
-
-        this.addChild(message);        
+        matchItem.x = 0;
+        matchItem.y = 40;
+        matchItem.pivot.set(0, 0);
+        matchItem.container = this;
+        this.matchItem = matchItem;
+        this.box.addChild(matchItem);        
     }
 }

@@ -31,4 +31,21 @@ export class MatchItemContainer extends Sprite {
         this.matchItem.y = 0;
         this.addChild(this.matchItem);
     }
+
+    setMatchItem(matchItem: MatchItem) {
+        console.log('setMatchItem');
+        let heightOfMatchItem = matchItem.height;
+
+        let newHeight = heightOfMatchItem + 60;
+
+        if(newHeight > 140) {
+            this.box.height = newHeight;
+        }
+        matchItem.x = 0;
+        matchItem.y = 0;
+        matchItem.pivot.set(0, 0);
+  
+        this.matchItem = matchItem;
+        this.box.addChild(matchItem);        
+    }
 }

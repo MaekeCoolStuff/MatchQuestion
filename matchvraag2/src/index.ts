@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import { MatchContainer } from './match-container';
 import { MatchItem } from './match-item';
 import { MatchItemContainer } from './match-item-container';
-import { CollisionService } from './collision-service';
+import { MatchCollisionService } from './match-collision-service';
 
 const app = new PIXI.Application(1200, 768, {
     transparent: true,
@@ -21,18 +21,18 @@ function gameLoop() {
 }
 
 let matchContainer1 = new MatchContainer('Confucius', 20, 20);
-CollisionService.matchContainers.push(matchContainer1);
+MatchCollisionService.matchContainers.push(matchContainer1);
 let matchContainer2 = new MatchContainer('Dakota Johnson', 20, 180);
-CollisionService.matchContainers.push(matchContainer2);
+MatchCollisionService.matchContainers.push(matchContainer2);
 let matchContainer3 = new MatchContainer('Jane Goodall', 20, 340);
-CollisionService.matchContainers.push(matchContainer3);
+MatchCollisionService.matchContainers.push(matchContainer3);
 let matchContainer4 = new MatchContainer('Elon Musk', 20, 500);
-CollisionService.matchContainers.push(matchContainer4);
+MatchCollisionService.matchContainers.push(matchContainer4);
 
-let matchItem1 = new MatchItem('I want my outfit to match my mood.');
-let matchItem2 = new MatchItem('Brand is just a perception, and perception will match reality over time. Sometimes it will be ahead, other times it will be behind. But brand is simply a collective impression some have about a product.');
-let matchItem3 = new MatchItem('A gentleman would be ashamed should his deeds not match his words.');
-let matchItem4 = new MatchItem('What you do makes a difference, and you have to decide what kind of difference you want to make.');
+let matchItem1 = new MatchItem('I want my outfit to match my mood.', stage);
+let matchItem2 = new MatchItem('Brand is just a perception, and perception will match reality over time. Sometimes it will be ahead, other times it will be behind. But brand is simply a collective impression some have about a product.', stage);
+let matchItem3 = new MatchItem('A gentleman would be ashamed should his deeds not match his words.', stage);
+let matchItem4 = new MatchItem('What you do makes a difference, and you have to decide what kind of difference you want to make.', stage);
 
 stage.addChild(matchContainer1);
 stage.addChild(matchContainer2);
@@ -40,9 +40,13 @@ stage.addChild(matchContainer3);
 stage.addChild(matchContainer4);
 
 let matchItemContainer1 = new MatchItemContainer(400, 20, matchItem1);
+MatchCollisionService.matchItemContainers.push(matchItemContainer1);
 let matchItemContainer2 = new MatchItemContainer(400, 180, matchItem2);
+MatchCollisionService.matchItemContainers.push(matchItemContainer2);
 let matchItemContainer3 = new MatchItemContainer(400, 340, matchItem3);
+MatchCollisionService.matchItemContainers.push(matchItemContainer3);
 let matchItemContainer4 = new MatchItemContainer(400, 500, matchItem4);
+MatchCollisionService.matchItemContainers.push(matchItemContainer4);
 
 stage.addChild(matchItemContainer1);
 stage.addChild(matchItemContainer2);
