@@ -33,7 +33,6 @@ export class MatchItemContainer extends Sprite {
     }
 
     setMatchItem(matchItem: MatchItem) {
-        console.log('setMatchItem');
         let heightOfMatchItem = matchItem.height;
 
         let newHeight = heightOfMatchItem + 60;

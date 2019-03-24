@@ -3,6 +3,7 @@ import { MatchContainer } from './match-container';
 import { MatchItem } from './match-item';
 import { MatchItemContainer } from './match-item-container';
 import { MatchCollisionService } from './match-collision-service';
+import * as exampleQuestions from './question';
 
 const app = new PIXI.Application(1200, 768, {
     transparent: true,
@@ -20,38 +21,30 @@ function gameLoop() {
     renderer.render(stage);
 }
 
-let matchContainer1 = new MatchContainer('Confucius', 20, 20);
-MatchCollisionService.matchContainers.push(matchContainer1);
-let matchContainer2 = new MatchContainer('Dakota Johnson', 20, 180);
-MatchCollisionService.matchContainers.push(matchContainer2);
-let matchContainer3 = new MatchContainer('Jane Goodall', 20, 340);
-MatchCollisionService.matchContainers.push(matchContainer3);
-let matchContainer4 = new MatchContainer('Elon Musk', 20, 500);
-MatchCollisionService.matchContainers.push(matchContainer4);
+let q = exampleQuestions.question;
+let matchContainerY = 20;
 
-let matchItem1 = new MatchItem('I want my outfit to match my mood.', stage);
-let matchItem2 = new MatchItem('Brand is just a perception, and perception will match reality over time. Sometimes it will be ahead, other times it will be behind. But brand is simply a collective impression some have about a product.', stage);
-let matchItem3 = new MatchItem('A gentleman would be ashamed should his deeds not match his words.', stage);
-let matchItem4 = new MatchItem('What you do makes a difference, and you have to decide what kind of difference you want to make.', stage);
+for(let key in q.matchContainers) {
+    if(q.matchContainers.hasOwnProperty(key)) {
+        let matchContainer = new MatchContainer(q.matchContainers[key], 20, matchContainerY);
+        MatchCollisionService.matchContainers.push(matchContainer);
+        stage.addChild(matchContainer);
+        matchContainerY += 160;
+    }
+}
 
-stage.addChild(matchContainer1);
-stage.addChild(matchContainer2);
-stage.addChild(matchContainer3);
-stage.addChild(matchContainer4);
+let matchItemContainerX = 400;
+let matchItemContainerY = 20;
 
-let matchItemContainer1 = new MatchItemContainer(400, 20, matchItem1);
-MatchCollisionService.matchItemContainers.push(matchItemContainer1);
-let matchItemContainer2 = new MatchItemContainer(400, 180, matchItem2);
-MatchCollisionService.matchItemContainers.push(matchItemContainer2);
-let matchItemContainer3 = new MatchItemContainer(400, 340, matchItem3);
-MatchCollisionService.matchItemContainers.push(matchItemContainer3);
-let matchItemContainer4 = new MatchItemContainer(400, 500, matchItem4);
-MatchCollisionService.matchItemContainers.push(matchItemContainer4);
-
-stage.addChild(matchItemContainer1);
-stage.addChild(matchItemContainer2);
-stage.addChild(matchItemContainer3);
-stage.addChild(matchItemContainer4);
+for(let key in q.matchItems) {
+    if(q.matchItems.hasOwnProperty(key)) {
+        let matchItem = new MatchItem(q.matchItems[key], stage);
+        let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem);
+        MatchCollisionService.matchItemContainers.push(matchItemContainer);
+        stage.addChild(matchItemContainer);
+        matchItemContainerY += 160;
+    }
+}
 
 gameLoop();
 
