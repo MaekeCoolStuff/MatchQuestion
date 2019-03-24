@@ -1,15 +1,12 @@
 import { Sprite, Graphics, Text } from "pixi.js";
 import { CollisionService } from "./collision-service";
 
-export class MatchChildContainer extends Sprite {
+export class MatchItem extends Sprite {
     public data: any;
     public dragging: boolean;
 
-    constructor(public text: string, public x: number, public y: number) {
+    constructor(public text: string) {
         super();
-
-        this.x = x;
-        this.y = y;
         this.setup();
     }
 
@@ -52,8 +49,11 @@ export class MatchChildContainer extends Sprite {
     }
 
     onDragStart(event) {
-        console.log('onDragStart');
         this.data = event.data;
+        let position = this.data.getLocalPosition(this);
+        this.pivot.set(position.x, position.y)
+        //this.position.set(this.data.global.x, this.data.global.y)
+    
         this.alpha = 0.5;
         this.dragging = true;
     }
@@ -61,7 +61,8 @@ export class MatchChildContainer extends Sprite {
     onDragEnd() {
         this.alpha = 1;
         this.dragging = false;
-        var newPosition = this.data.getLocalPosition(this.parent);
+        var newPosition = this.data.getLocalPosition(this.parent.parent);
+        console.log('newPosition.x', newPosition.x, newPosition.y)
         let hasCollided = CollisionService.checkForCollisions(newPosition.x, newPosition.y, this.text);
         this.data = null;        
 
