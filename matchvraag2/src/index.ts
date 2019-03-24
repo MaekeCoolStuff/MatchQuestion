@@ -5,6 +5,8 @@ import { MatchItemContainer } from './match-item-container';
 import { MatchCollisionService } from './match-collision-service';
 import * as exampleQuestions from './question';
 
+PIXI.settings.RESOLUTION = 2;
+
 const app = new PIXI.Application(1024, 768, {
     transparent: true,
     antialias: true
@@ -12,6 +14,9 @@ const app = new PIXI.Application(1024, 768, {
 
 const renderer = app.renderer;
 document.body.appendChild(renderer.view);
+renderer.view.style.width = '1024px';
+renderer.view.style.height = '768px';
+
 const stage = new PIXI.Container();
 let state = inGameState;
 
