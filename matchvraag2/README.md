@@ -1,2 +1,2 @@
-# pixi-platformer-game
-A platformer game made with pixi
+# New Match Question Type
+Both in HTML5 and PIXI.js, multiple variants
