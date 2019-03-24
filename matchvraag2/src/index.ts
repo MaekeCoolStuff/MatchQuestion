@@ -5,7 +5,7 @@ import { MatchItemContainer } from './match-item-container';
 import { MatchCollisionService } from './match-collision-service';
 import * as exampleQuestions from './question';
 
-const app = new PIXI.Application(1200, 768, {
+const app = new PIXI.Application(1024, 768, {
     transparent: true,
     antialias: true
 });

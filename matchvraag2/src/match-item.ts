@@ -58,8 +58,6 @@ export class MatchItem extends Sprite {
         this.pivot.set(position.x, position.y)
         this.position.set(this.data.global.x, this.data.global.y)
 
-        
-    
         this.alpha = 0.5;
         this.dragging = true;
     }
@@ -73,18 +71,8 @@ export class MatchItem extends Sprite {
             y: this.data.global.y
         };
 
-        console.log(newPosition);
-
-        let hasCollided = MatchCollisionService.checkForMatchContainerCollisions(newPosition.x, newPosition.y, this);
-        MatchCollisionService.checkForMatchItemContainerCollisions(newPosition.x, newPosition.y, this);
-        this.data = null;        
-
-        if(hasCollided) {
-            // this.x = 0;
-            // this.y = 0;
-            // this.pivot.set(0, 0);
-            //this.visible = false;
-        }
+        MatchCollisionService.checkForContainerCollisions(newPosition.x, newPosition.y, this);
+        this.data = null;
     }
 
     onDragMove() {
