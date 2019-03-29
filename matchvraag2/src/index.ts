@@ -1,13 +1,9 @@
 import * as PIXI from 'pixi.js';
-import { MatchContainer } from './match-container';
-import { MatchItem } from './match-item';
-import { MatchItemContainer } from './match-item-container';
-import { MatchCollisionService } from './match-collision-service';
-import * as exampleQuestions from './question';
+import { MenuView } from './views/menu-view';
+import { MatchQuestionView } from './views/match-question-view';
+import { question, question2 } from './data/question';
 
-PIXI.settings.RESOLUTION = 2;
-
-const app = new PIXI.Application(1024, 768, {
+const app = new PIXI.Application(1024, 800, {
     transparent: true,
     antialias: true
 });
@@ -15,10 +11,48 @@ const app = new PIXI.Application(1024, 768, {
 const renderer = app.renderer;
 document.body.appendChild(renderer.view);
 renderer.view.style.width = '1024px';
-renderer.view.style.height = '768px';
+renderer.view.style.height = '800px';
 
-const stage = new PIXI.Container();
-let state = inGameState;
+export const stage = new PIXI.Container();
+let state = menuState;
+let stateInitialized = false;
+let currentQuestion = question;
+
+const menuItems = [
+    {
+        title: 'Tekst aan tekst matchen',
+        callback: () => {
+            clearStage();
+            stateInitialized = false;
+            state = inQuestionState;
+        }
+    },
+    {
+        title: 'Plaatje aan tekst matchen',
+        callback: () => {
+            clearStage();
+            stateInitialized = false;
+            currentQuestion = question2;
+            state = inQuestionState;
+        }
+    },
+    {
+        title: 'Plaatje aan plaatje matchen',
+        callback: () => {}
+    },
+    {
+        title: 'Teksten aan tekst matchen',
+        callback: () => {}
+    },
+    {
+        title: 'Plaatjes aan tekst matchen',
+        callback: () => {}
+    },
+    {
+        title: 'Plaatjes aan plaatje matchen',
+        callback: () => {}
+    }
+]
 
 function gameLoop() {
     requestAnimationFrame(gameLoop);
@@ -26,33 +60,30 @@ function gameLoop() {
     renderer.render(stage);
 }
 
-let q = exampleQuestions.question;
-let matchContainerY = 20;
-
-for(let key in q.matchContainers) {
-    if(q.matchContainers.hasOwnProperty(key)) {
-        let matchContainer = new MatchContainer(q.matchContainers[key], 20, matchContainerY);
-        MatchCollisionService.matchContainers.push(matchContainer);
-        stage.addChild(matchContainer);
-        matchContainerY += 160;
-    }
-}
-
-let matchItemContainerX = 400;
-let matchItemContainerY = 20;
-
-for(let key in q.matchItems) {
-    if(q.matchItems.hasOwnProperty(key)) {
-        let matchItem = new MatchItem(q.matchItems[key], stage);
-        let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem);
-        MatchCollisionService.matchItemContainers.push(matchItemContainer);
-        stage.addChild(matchItemContainer);
-        matchItemContainerY += 160;
-    }
-}
 
 gameLoop();
 
-function inGameState() {
 
+function menuState() {
+    if(!stateInitialized) {
+        stateInitialized = true;
+        new MenuView(stage, app.renderer, menuItems);
+    }
+}
+
+function inQuestionState() {
+    if(!stateInitialized) {
+        stateInitialized = true;
+        new MatchQuestionView(stage, app.renderer, currentQuestion);
+    }
+}
+
+function clearStage() {
+    for (var i = stage.children.length - 1; i >= 0; i--) {	stage.removeChild(stage.children[i]);};
+}
+
+export function backToMenu() {
+    clearStage();
+    stateInitialized = false;
+    state = menuState;
 }

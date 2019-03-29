@@ -1,14 +1,14 @@
 import { Sprite, Graphics, Text, Container } from "pixi.js";
-import { MatchCollisionService } from "./match-collision-service";
 import { MatchItemContainer } from "./match-item-container";
 import { MatchContainer } from "./match-container";
+import { MatchQuestion } from "./match-question";
 
 export class MatchItem extends Sprite {
     public data: any;
     public dragging: boolean;
     public container: MatchItemContainer | MatchContainer;
 
-    constructor(public text: string, public stage: Container) {
+    constructor(public text: string, public itemIdentifier: string, public stage: Container, public matchQuestion: MatchQuestion) {
         super();
         this.setup();
     }
@@ -58,7 +58,7 @@ export class MatchItem extends Sprite {
         this.pivot.set(position.x, position.y)
         this.position.set(this.data.global.x, this.data.global.y)
 
-        this.alpha = 0.5;
+        this.alpha = 0.75;
         this.dragging = true;
     }
 
@@ -71,7 +71,7 @@ export class MatchItem extends Sprite {
             y: this.data.global.y
         };
 
-        MatchCollisionService.checkForContainerCollisions(newPosition.x, newPosition.y, this);
+        this.matchQuestion.checkForContainerCollisions(newPosition.x, newPosition.y, this, true);
         this.data = null;
     }
 
@@ -80,6 +80,7 @@ export class MatchItem extends Sprite {
             var newPosition = this.data.getLocalPosition(this.parent);
             this.position.x = newPosition.x;
             this.position.y = newPosition.y;
-        }
+            this.matchQuestion.checkForContainerCollisions(newPosition.x, newPosition.y, this, false);
+        }       
     }
 }

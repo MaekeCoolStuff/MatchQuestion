@@ -43,8 +43,18 @@ export class MatchItemContainer extends Sprite {
         matchItem.x = 0;
         matchItem.y = 0;
         matchItem.pivot.set(0, 0);
+        
   
         this.matchItem = matchItem;
-        this.box.addChild(matchItem);        
+        this.box.addChild(matchItem);
+        this.alpha = 1;    
+    }
+
+    setHoverState() {
+        this.alpha = 0.6;
+    }
+
+    setNonHoverState() {
+        this.alpha = 1;
     }
 }

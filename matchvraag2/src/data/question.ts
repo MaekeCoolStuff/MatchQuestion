@@ -23,3 +23,34 @@ export const question = {
         // Het kan ook voorkomen dat er helemaal geen matchItem aan een matchContainer gematched hoeft te worden. i.e. []
     }
 }
+
+export const question2 = {
+    type: "ImageToText",
+    variant: "DragAndDrop",
+    matchContainers: {
+        "A": "Assassins Creed",
+        "B": "Monopoly",
+        "C": "Pokemon",
+        "D": "Catan"
+    },
+    matchItems: {
+        "A": "/images/pokemon2.jpg",
+        "B": "/images/catan2.jpg",
+        "C": "/images/odyssee2.jpg",
+        "D": "/images/monopoly2.jpg"
+    },
+    correctAnswers: {
+        "A": ["C"],
+        "B": ["A"],
+        "C": ["D"],
+        "D": ["B"]
+    }
+}
+
+export interface IQuestionVO {
+    type: string;
+    variant: string;
+    matchContainers: Object;
+    matchItems: Object;
+    correctAnswers: Object;
+}
