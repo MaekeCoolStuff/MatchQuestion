@@ -14,6 +14,10 @@ export class MatchQuestionView extends PIXI.Container {
 
     initializeView() {
         this.matchQuestion = new MatchQuestion(this.question, this.stage);
+        if(this.matchQuestion.type === 'ImageToText') {
+            this.renderer.resize(1024, 2000);
+            this.renderer.view.style.height = '2000px';
+        }
         this.setDefaultButtons();
     }
     

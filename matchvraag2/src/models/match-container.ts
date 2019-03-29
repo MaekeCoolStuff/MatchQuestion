@@ -1,13 +1,14 @@
 import { Sprite, Graphics, Text } from "pixi.js";
 import { MatchItem } from "./match-item";
 import * as question from '../data/question';
+import { MatchQuestion } from "./match-question";
 
 export class MatchContainer extends Sprite {
 
     box: Graphics;
     matchItem: MatchItem;
 
-    constructor(public title: string, public questionIdentifier: string, public x: number, public y: number) {
+    constructor(public title: string, public questionIdentifier: string, public x: number, public y: number, public matchQuestion: MatchQuestion) {
         super();
 
         this.x = x;
@@ -24,33 +25,50 @@ export class MatchContainer extends Sprite {
     }
 
     setupGraphics() {
-        this.box = new Graphics();
-        this.box.beginFill(0xefefef);
-        this.box.drawRect(0, 0, 300, 140);
-        this.box.endFill();
-        this.interactive = true;
-
-        let title = new Graphics();
-        title.beginFill(0x0d4374);
-        title.drawRect(0, 0, 300, 40);
-        title.endFill();
+        switch(this.matchQuestion.type) {
+            case 'TextToText':
+                this.box = new Graphics();
+                this.box.beginFill(0xefefef);
+                this.box.drawRect(0, 0, 300, 140);
+                this.box.endFill();
+                this.interactive = true;
         
+                let title = new Graphics();
+                title.beginFill(0x0d4374);
+                title.drawRect(0, 0, 300, 40);
+                title.endFill();
+                
+        
+                let message = new Text(this.title, {
+                    fill: '0xffffff',
+                    fontSize: 16
+                });
+                message.x = 20;
+                message.y = 10;
 
-        let message = new Text(this.title, {
-            fill: '0xffffff',
-            fontSize: 16
-        });
-        message.x = 20;
-        message.y = 10;
+                this.addChild(this.box);
+                this.addChild(title);
+                this.addChild(message);
+            break;
+            case 'ImageToText':
+                this.box = new Graphics();
+                this.box.beginFill(0x0d4374);
+                this.box.drawRect(0, 0, 300, 300);
+                this.box.endFill();
 
-        //this.on('mouseover', this.onMouseOver);
-        //this.on('mouseout', this.onMouseOut);
+                        
+                let imageMessage = new Text(this.title, {
+                    fill: '0xffffff',
+                    fontSize: 32
+                });
+                imageMessage.x = this.box.width / 2 - imageMessage.width / 2;
+                imageMessage.y = this.box.height / 2 - imageMessage.height / 2;
+                
+                this.box.addChild(imageMessage);
 
-        this.addChild(this.box);
-        this.addChild(title);
-        this.addChild(message);
-
-        //this.getBounds().contains()
+                this.addChild(this.box);
+            break;
+        }
     }
     
     onMouseOver(event) {

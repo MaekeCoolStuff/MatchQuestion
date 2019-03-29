@@ -7,16 +7,22 @@ import { MatchContainer } from "./match-container";
 export class MatchQuestion {
     public matchContainers: MatchContainer[] = [];
     public matchItemContainers: MatchItemContainer[] = [];
+    public type: string;
 
     constructor(question: IQuestionVO, stage: Container) {
+        this.type = question.type;
         let matchContainerY = 20;
+        let matchYIncrement = 200;
+        if(this.type === 'ImageToText') {
+            matchYIncrement = 320;
+        }
     
         for(let key in question.matchContainers) {
             if(question.matchContainers.hasOwnProperty(key)) {
-                let matchContainer = new MatchContainer(question.matchContainers[key], key, 20, matchContainerY);
+                let matchContainer = new MatchContainer(question.matchContainers[key], key, 20, matchContainerY, this);
                 this.matchContainers.push(matchContainer);
                 stage.addChild(matchContainer);
-                matchContainerY += 200;
+                matchContainerY += matchYIncrement;
             }
         }
         
@@ -26,10 +32,10 @@ export class MatchQuestion {
         for(let key in question.matchItems) {
             if(question.matchItems.hasOwnProperty(key)) {
                 let matchItem = new MatchItem(question.matchItems[key], key, stage, this);
-                let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem);
+                let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem, this);
                 this.matchItemContainers.push(matchItemContainer);
                 stage.addChild(matchItemContainer);
-                matchItemContainerY += 200;
+                matchItemContainerY += matchYIncrement;
             }
         }
     }

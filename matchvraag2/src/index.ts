@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import { MenuView } from './views/menu-view';
 import { MatchQuestionView } from './views/match-question-view';
 import { question, question2 } from './data/question';
+import { scaleToWindow } from './utils/scaleToWindow';
 
 const app = new PIXI.Application(1024, 800, {
     transparent: true,
@@ -12,6 +13,10 @@ const renderer = app.renderer;
 document.body.appendChild(renderer.view);
 renderer.view.style.width = '1024px';
 renderer.view.style.height = '800px';
+
+// window.addEventListener("resize", event => {
+//     scaleToWindow(renderer.view);
+// });
 
 export const stage = new PIXI.Container();
 let state = menuState;
@@ -24,6 +29,7 @@ const menuItems = [
         callback: () => {
             clearStage();
             stateInitialized = false;
+            currentQuestion = question;
             state = inQuestionState;
         }
     },

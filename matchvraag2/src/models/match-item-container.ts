@@ -1,11 +1,12 @@
 import { Sprite, Graphics, Text } from "pixi.js";
 import { MatchItem } from "./match-item";
+import { MatchQuestion } from "./match-question";
 
 export class MatchItemContainer extends Sprite {
 
     box: Graphics;
     
-    constructor(public x: number, public y: number, public matchItem: MatchItem) {
+    constructor(public x: number, public y: number, public matchItem: MatchItem, public matchQuestion: MatchQuestion) {
         super();
 
         this.x = x;
