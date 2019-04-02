@@ -23,6 +23,19 @@ let state = menuState;
 let stateInitialized = false;
 let currentQuestion = question;
 
+PIXI['Loader'].shared
+.add("/src/images/catan1.png")
+.add("/src/images/catan2.jpg")
+.add("/src/images/monopoly1.jpeg")
+.add("/src/images/monopoly2.jpg")
+.add("/src/images/odyssee1.jpg")
+.add("/src/images/odyssee2.jpg")
+.add("/src/images/pokemon1.jpg")
+.add("/src/images/pokemon2.jpg")
+.load(() => {
+    gameLoop();
+})
+
 const menuItems = [
     {
         title: 'Tekst aan tekst matchen',
@@ -66,10 +79,6 @@ function gameLoop() {
     renderer.render(stage);
 }
 
-
-gameLoop();
-
-
 function menuState() {
     if(!stateInitialized) {
         stateInitialized = true;
@@ -78,7 +87,7 @@ function menuState() {
 }
 
 function inQuestionState() {
-    if(!stateInitialized) {
+    if(!stateInitialized) {      
         stateInitialized = true;
         new MatchQuestionView(stage, app.renderer, currentQuestion);
     }

@@ -2,6 +2,7 @@ import { Sprite, Graphics, Text, Container } from "pixi.js";
 import { MatchItemContainer } from "./match-item-container";
 import { MatchContainer } from "./match-container";
 import { MatchQuestion } from "./match-question";
+import * as PIXI from 'pixi.js';
 
 export class MatchItem extends Sprite {
     public data: any;
@@ -24,19 +25,36 @@ export class MatchItem extends Sprite {
         let g = new Graphics();
         g.beginFill(0xefefef);
         g.drawRect(0, 0, 300, 140);
-        g.endFill();        
-
-        let message = new Text(this.text, {
-            fill: '0x565656',
-            fontSize: 16,
-            wordWrap: true,
-            wordWrapWidth: 270
-        });
-        message.x = 20;
-        message.y = 10;
-
+        g.endFill();
+        
+        console.log(this.matchQuestion.type);  
         this.addChild(g);
-        this.addChild(message);
+        
+        if(this.matchQuestion.type === 'ImageToText') {
+            console.log(PIXI['Loader'].shared.resources);
+            let image = new Sprite(PIXI['Loader'].shared.resources[this.text].texture);
+            let longestSide = image.width > image.height ? 'width' : 'height';
+            let ratio = 1;
+            if(longestSide === 'width') {
+                ratio = image.width / image.height;
+            } else {
+                ratio = image.height / image.width;
+            }
+
+            console.log('image', image);
+            this.addChild(image);
+        } else {
+            let message = new Text(this.text, {
+                fill: '0x565656',
+                fontSize: 16,
+                wordWrap: true,
+                wordWrapWidth: 270
+            });
+            message.x = 20;
+            message.y = 10;
+            this.addChild(message);
+        }
+        
 
         this.interactive = true;
         this.buttonMode = true;

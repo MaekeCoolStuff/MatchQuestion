@@ -1,69 +1,35 @@
-// var draggableElements = document.querySelectorAll('.match-child');
+var droppables = document.getElementsByClassName('dropzone');
+var overlapThreshold = "50%"; 
 
-// function handleDragStart(e) {
-//     this.style.opacity = '0.4';
-//     e.dataTransfer.setData('text', e.target.id);
-// }
 
-// function handleDragOver(e) {
-//     if(e.preventDefault) {
-//         e.preventDefault();
-//     }
-
-//     e.dataTransfer.dropEffect = 'move';
-
-//     return false;
-// }
-
-// function handleDrop(e) {
-//     console.log('e', e);
-//     if(e.stopPropagation) {
-//         e.stopPropagation();
-//     }
-
-//     return false;
-// }
-
-// function handleDragEnd(e) {
-//     [].forEach.call(draggableElements, function(element) {
-//         element.classList.remove('over');
-//     })
-// }
-
-// function handleDragEnter(e) {
-//     this.classList.add('over');
-// }
-
-// function handleDragLeave(e) {
-//     this.classList.remove('over');
-// }
-
-// [].forEach.call(draggableElements, function(element) {
-//     element.addEventListener('dragstart', handleDragStart, false);
-//     element.addEventListener('dragenter', handleDragEnter, false);
-//     element.addEventListener('dragover', handleDragOver, false);
-//     element.addEventListener('dragleave', handleDragLeave, false);
-//     element.addEventListener('drop', handleDrop, false);
-//     element.addEventListener('dragend', handleDragEnd, false);
-// });
-
-function dragLeave(ev) {
-    ev.preventDefault();
-    ev.target.classList.remove('over');
-}
-
-function allowDrop(ev) {
-    ev.preventDefault();
-    ev.target.classList.add('over');
-}
-
-function drag(ev) {
-    ev.dataTransfer.setData('text', ev.target.id);
-}
-
-function drop(ev) {
-    ev.preventDefault();
-    ev.target.classList.remove('over');
-    var data = ev.dataTransfer.getData('text');
-    ev.target.appendChild(document.getElementById(data));
-}
+let option1 = Draggable.create("#drag1", {
+    bounds: document.getElementById("container"),
+    autoScroll: 1,
+    onDragStart: function(e) {
+       //document.getElementById('container').appendChild(e.target);
+    },
+    onDrag: function(e) {
+        var i = droppables.length;
+        while (--i > -1) {
+            if (this.hitTest(droppables[i])) {
+                droppables[i].classList.add("highlight");
+            } else {
+                droppables[i].classList.remove("highlight");
+            }
+        }
+    },
+    onDragEnd: function(e) {
+        console.log('end', e);
+        var i = droppables.length;
+        while (--i > -1) {
+            if (this.hitTest(droppables[i])) {
+               droppables[i].appendChild(e.target.childNodes[0]);
+               droppables[i].classList.remove("highlight");
+               e.target.remove();
+               return;
+            } else {
+                droppables[i].classList.remove("highlight");
+            }
+        }
+    }
+});

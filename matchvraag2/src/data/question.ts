@@ -34,10 +34,10 @@ export const question2 = {
         "D": "Catan"
     },
     matchItems: {
-        "A": "/images/pokemon2.jpg",
-        "B": "/images/catan2.jpg",
-        "C": "/images/odyssee2.jpg",
-        "D": "/images/monopoly2.jpg"
+        "A": "/src/images/pokemon2.jpg",
+        "B": "/src/images/catan2.jpg",
+        "C": "/src/images/odyssee2.jpg",
+        "D": "/src/images/monopoly2.jpg"
     },
     correctAnswers: {
         "A": ["C"],

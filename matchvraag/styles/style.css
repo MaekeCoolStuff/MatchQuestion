@@ -2,6 +2,10 @@ h2 {
     margin-bottom: 50px;
 }
 
+#drag1 {
+    z-index: 500;
+}
+
 #container {
     max-width: 1024px;
     margin: 0 auto;
@@ -41,10 +45,10 @@ h2 {
     font-size: 16px;
 }
 
-.match-child:hover {
+.over {
     border: 2px dashed #565656;
 }
 
-.over {
-    border: 2px dashed #565656;
+.highlight {
+    background-color: #565656;
 }

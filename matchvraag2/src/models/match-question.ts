@@ -3,6 +3,7 @@ import { MatchItemContainer } from "./match-item-container";
 import { Container } from "pixi.js";
 import { MatchItem } from "./match-item";
 import { MatchContainer } from "./match-container";
+import * as PIXI from 'pixi.js';
 
 export class MatchQuestion {
     public matchContainers: MatchContainer[] = [];
@@ -16,28 +17,30 @@ export class MatchQuestion {
         if(this.type === 'ImageToText') {
             matchYIncrement = 320;
         }
-    
-        for(let key in question.matchContainers) {
-            if(question.matchContainers.hasOwnProperty(key)) {
-                let matchContainer = new MatchContainer(question.matchContainers[key], key, 20, matchContainerY, this);
-                this.matchContainers.push(matchContainer);
-                stage.addChild(matchContainer);
-                matchContainerY += matchYIncrement;
-            }
-        }
+
+                    for(let key in question.matchContainers) {
+                        if(question.matchContainers.hasOwnProperty(key)) {
+                            let matchContainer = new MatchContainer(question.matchContainers[key], key, 20, matchContainerY, this);
+                            this.matchContainers.push(matchContainer);
+                            stage.addChild(matchContainer);
+                            matchContainerY += matchYIncrement;
+                        }
+                    }
+                    
+                    let matchItemContainerX = 400;
+                    let matchItemContainerY = 20;
+                    
+                    for(let key in question.matchItems) {
+                        if(question.matchItems.hasOwnProperty(key)) {
+                            let matchItem = new MatchItem(question.matchItems[key], key, stage, this);
+                            let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem, this);
+                            this.matchItemContainers.push(matchItemContainer);
+                            stage.addChild(matchItemContainer);
+                            matchItemContainerY += matchYIncrement;
+                        }
+                    }
+                
         
-        let matchItemContainerX = 400;
-        let matchItemContainerY = 20;
-        
-        for(let key in question.matchItems) {
-            if(question.matchItems.hasOwnProperty(key)) {
-                let matchItem = new MatchItem(question.matchItems[key], key, stage, this);
-                let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem, this);
-                this.matchItemContainers.push(matchItemContainer);
-                stage.addChild(matchItemContainer);
-                matchItemContainerY += matchYIncrement;
-            }
-        }
     }
 
     public checkForContainerCollisions(x: number, y: number, matchItem: MatchItem, dragEnd: boolean): boolean {
