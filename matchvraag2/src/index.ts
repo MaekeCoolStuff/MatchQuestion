@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { MenuView } from './views/menu-view';
 import { MatchQuestionView } from './views/match-question-view';
-import { question, question2 } from './data/question';
+import { question3, question2, question4, question5, question6, question7, question8, question9 } from './data/question';
 import { scaleToWindow } from './utils/scaleToWindow';
 
 const app = new PIXI.Application(1024, 800, {
@@ -11,19 +11,18 @@ const app = new PIXI.Application(1024, 800, {
 
 const renderer = app.renderer;
 document.body.appendChild(renderer.view);
-renderer.view.style.width = '1024px';
-renderer.view.style.height = '800px';
-
 // window.addEventListener("resize", event => {
 //     scaleToWindow(renderer.view);
 // });
 
 export const stage = new PIXI.Container();
+let questions = [question3, question4, question5];
 let state = menuState;
 let stateInitialized = false;
-let currentQuestion = question;
+let currentQuestionIndex = 0;
+let currentQuestion = questions[0];
 
-PIXI['Loader'].shared
+PIXI.loaders.shared
 .add("/src/images/catan1.png")
 .add("/src/images/catan2.jpg")
 .add("/src/images/monopoly1.jpeg")
@@ -38,38 +37,25 @@ PIXI['Loader'].shared
 
 const menuItems = [
     {
-        title: 'Tekst aan tekst matchen',
+        title: 'Tekst matchen',
         callback: () => {
             clearStage();
             stateInitialized = false;
-            currentQuestion = question;
+            questions = [question3, question4, question5];
+            currentQuestion = question3;
             state = inQuestionState;
         }
     },
     {
-        title: 'Plaatje aan tekst matchen',
+        title: 'Plaatjes matchen',
         callback: () => {
             clearStage();
             stateInitialized = false;
-            currentQuestion = question2;
+            currentQuestionIndex = 0;
+            questions = [question6, question7, question8, question9];
+            currentQuestion = question6;
             state = inQuestionState;
         }
-    },
-    {
-        title: 'Plaatje aan plaatje matchen',
-        callback: () => {}
-    },
-    {
-        title: 'Teksten aan tekst matchen',
-        callback: () => {}
-    },
-    {
-        title: 'Plaatjes aan tekst matchen',
-        callback: () => {}
-    },
-    {
-        title: 'Plaatjes aan plaatje matchen',
-        callback: () => {}
     }
 ]
 
@@ -87,17 +73,54 @@ function menuState() {
 }
 
 function inQuestionState() {
-    if(!stateInitialized) {      
+    if (!stateInitialized) {
         stateInitialized = true;
-        new MatchQuestionView(stage, app.renderer, currentQuestion);
+
+        if (currentQuestion.type === 'ImageToText') {
+            let loader = PIXI.loaders.shared;
+            loader.reset();
+            for (let key in currentQuestion.matchItems) {
+                if (currentQuestion.matchItems.hasOwnProperty(key)) {
+                    loader.add(currentQuestion.matchItems[key]);
+                }
+            }
+
+            loader.load(() => {
+                new MatchQuestionView(stage, app.renderer, currentQuestion, () => {
+                    clearStage();
+                    stateInitialized = false;
+                    state = menuState;
+                });
+            });
+        } else {
+            new MatchQuestionView(stage, app.renderer, currentQuestion, () => {
+                clearStage();
+                stateInitialized = false;
+                state = menuState;
+            });
+        }
     }
+}
+
+export function nextQuestion() {
+    if(currentQuestionIndex + 1 < questions.length) {
+        currentQuestionIndex++;
+        currentQuestion = questions[currentQuestionIndex];
+    } else {
+        currentQuestionIndex = 0;
+        currentQuestion = questions[currentQuestionIndex];
+    }
+
+    clearStage();
+    stateInitialized = false;
+    state = inQuestionState;
 }
 
 function clearStage() {
     for (var i = stage.children.length - 1; i >= 0; i--) {	stage.removeChild(stage.children[i]);};
 }
 
-export function backToMenu() {
+export function backToMenu() {    
     clearStage();
     stateInitialized = false;
     state = menuState;

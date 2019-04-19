@@ -7,6 +7,7 @@ export class MenuView extends PIXI.Container {
     }
 
     initializeView() {
+        scroll(0,0);
         let matchQuestionTitle = new PIXI.Text('Match Question voorbeelden');
         matchQuestionTitle.x = this.renderer.view.width / 2 - matchQuestionTitle.width / 2;
         matchQuestionTitle.y = 20;
