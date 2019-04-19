@@ -15,9 +15,28 @@ export class MatchQuestionView extends PIXI.Container {
     public initializeView() {
         scroll(0,0);
         this.matchQuestion = new MatchQuestion(this.question, this.stage, this);
+        let headerWidth = 725; 
         if (this.matchQuestion.type === 'ImageToText') {
             this.renderer.resize(1200, 2000);
+            headerWidth = 1075;
         }
+
+        let header = new PIXI.Graphics();
+        header.beginFill(0xffd356);
+        header.drawRect(0, 0, headerWidth, 60);
+        header.endFill();
+        this.stage.addChild(header);
+
+        let headerText = new PIXI.Text(this.question.htmlFragment, {
+            fontSize: 16,
+            wordWrap: true,
+            wordWrapWidth: headerWidth - 40
+        });
+        headerText.x = 20;
+        headerText.y = 10;
+
+        header.addChild(headerText);
+
         this.setDefaultButtons();
     }
 

@@ -70,7 +70,7 @@ export const question5 = {
 export const question6 = {
     type: "ImageToText",
     variant: "DragAndDrop",
-    htmlFragment: "",
+    htmlFragment: "Lees de beschrijvingen. Deze personen waren de afgelopen tijd in het nieuws. Welke naam hoort bij welke beschrijving? Koppel de juiste beschrijving aan de juiste persoon.",
     matchContainers: {
         "A": "Ronnie Flex",
         "B": "Emiliano Sala",
@@ -94,7 +94,7 @@ export const question6 = {
 export const question7 = {
     type: "ImageToText",
     variant: "DragAndDrop",
-    htmlFragment: "",
+    htmlFragment: "Afgelopen week was er ophef over verschillende bedreigingen aan het adres van Thierry Baudet. Wie deed welke uitspraak? Sleep de juiste persoon naar bijbehorende uitspraak.",
     matchContainers: {
         "A": "Mark Rutte",
         "B": "Woordvoerder Openbaar Ministerie",
@@ -118,7 +118,7 @@ export const question7 = {
 export const question8 = {
     type: "ImageToText",
     variant: "DragAndDrop",
-    htmlFragment: "",
+    htmlFragment: "In welke landen vonden de volgende gebeurtenissen plaats? Sleep de gebeurtenissenin de juiste volgorde.",
     matchContainers: {
         "A": "Veel mensen komen om en raken gewond door twee tornado's.",
         "B": "Tientallen mensen komen om bij het instorten van een goudmijn.",
@@ -139,7 +139,7 @@ export const question8 = {
 export const question9 = {
     type: "ImageToText",
     variant: "DragAndDrop",
-    htmlFragment: "",
+    htmlFragment: "Waar vonden de volgende gebeurtenissen plaats? Sleep het juiste land naar de juiste gebeurtenis.",
     matchContainers: {
         "A": "Vrachtwagen rijdt door stuurfout in op groep mensen: 18 doden.",
         "B": "Noodtoestand uitgeroepen na mazelenuitbraak.",

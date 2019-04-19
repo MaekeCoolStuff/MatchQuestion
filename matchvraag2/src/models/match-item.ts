@@ -44,11 +44,24 @@ export class MatchItem extends Sprite {
             triangle.y = g.height / 2 - triangle.height / 2;
             g.addChild(triangle);
             let image = new PIXI.Sprite(PIXI.loaders.shared.resources[this.text].texture);
-            image.width = 290;
-            image.height = 140;
+            let change = 0;
+            
+            //image.height = 140;
             image.x = 5;
             image.y = 5;
-            // let longestSide = image.width > image.height ? 'width' : 'height';
+            let longestSide = image.width > image.height ? 'width' : 'height';
+            let newHeight = 0;
+            if(longestSide === 'width') {
+                change = image.width / 290;
+                let newHeight = image.height / change;
+                image.height = newHeight;
+                let extraHeight = g.height - image.height;
+                image.y = extraHeight / 2;
+            } else {
+                image.width = 290;
+            }
+
+            image.width = 290;
             // let ratio = 1;
             // if (longestSide === 'width') {
             //     ratio = image.width / image.height;

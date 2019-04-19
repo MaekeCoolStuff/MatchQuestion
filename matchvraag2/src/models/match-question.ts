@@ -18,7 +18,7 @@ export class MatchQuestion {
 
     public initQuestion(question: IQuestionVO, stage) {
         this.type = question.type;
-        let matchContainerY = 20;
+        let matchContainerY = 80;
         let matchYIncrement = 200;
         if (this.type === 'ImageToText') {
             matchYIncrement = 200;
@@ -37,7 +37,7 @@ export class MatchQuestion {
         if (this.question.type === 'ImageToText') {
            matchItemContainerX = 750;
         }
-        let matchItemContainerY = 20;
+        let matchItemContainerY = 80;
 
         for (let key in question.matchItems) {
             if (question.matchItems.hasOwnProperty(key)) {
