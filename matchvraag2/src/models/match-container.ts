@@ -14,7 +14,6 @@ export class MatchContainer extends PIXI.Sprite {
     public placeholderBackground;
     public triangle;
     public matchItem: MatchItem;
-    public validateTexts: PIXI.Text[] = [];
 
     constructor(public title: string, public questionIdentifier: string, public x: number, public y: number, public matchQuestion: MatchQuestion) {
         super();
@@ -173,9 +172,7 @@ export class MatchContainer extends PIXI.Sprite {
     }
 
     public validate() {
-        this.validateTexts.forEach(t => t.destroy());
-        this.validateTexts = [];
-        let answers = question.question.correctAnswers;
+        let answers = this.matchQuestion.question.correctAnswers;
 
         if (this.matchItem) {
             if (answers[this.questionIdentifier].indexOf(this.matchItem.itemIdentifier) > -1) {
@@ -187,7 +184,7 @@ export class MatchContainer extends PIXI.Sprite {
             } else {
                 let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/fout.png'].texture);
                 incorrectImage.scale.set(0.5, 0.5);
-                incorrectImage.x = 615;
+                incorrectImage.x = this.matchQuestion.type === 'ImageToText' ? 615 : 315;
                 incorrectImage.y = 20;
                 this.box.addChild(incorrectImage);
             }
@@ -195,7 +192,7 @@ export class MatchContainer extends PIXI.Sprite {
         } else {
             let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/fout.png'].texture);
             incorrectImage.scale.set(0.5, 0.5);
-            incorrectImage.x = 615;
+            incorrectImage.x = this.matchQuestion.type === 'ImageToText' ? 615 : 315;
             incorrectImage.y = 20;
             this.box.addChild(incorrectImage);
         }
