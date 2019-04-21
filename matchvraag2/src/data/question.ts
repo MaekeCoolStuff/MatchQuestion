@@ -78,10 +78,10 @@ export const question6 = {
         "D": "Julen"
     },
     matchItems: {
-        "A": "/src/images/namen/Julen.PNG",
-        "B": "/src/images/namen/EmilianoSala.PNG",
-        "C": "/src/images/namen/RonnieFlex.PNG",
-        "D": "/src/images/namen/ChrisBrown.PNG"
+        "A": "src/images/namen/Julen.PNG",
+        "B": "src/images/namen/EmilianoSala.PNG",
+        "C": "src/images/namen/RonnieFlex.PNG",
+        "D": "src/images/namen/ChrisBrown.PNG"
     },
     correctAnswers: {
         "A": ["C"],
@@ -102,10 +102,10 @@ export const question7 = {
         "D": "Thierry Baudet"
     },
     matchItems: {
-        "A": "/src/images/uitspraken/baudet.PNG",
-        "B": "/src/images/uitspraken/cartoonist.PNG",
-        "C": "/src/images/uitspraken/markrutte.PNG",
-        "D": "/src/images/uitspraken/woordvoerderOM.PNG"
+        "A": "src/images/uitspraken/baudet.PNG",
+        "B": "src/images/uitspraken/cartoonist.PNG",
+        "C": "src/images/uitspraken/markrutte.PNG",
+        "D": "src/images/uitspraken/woordvoerderOM.PNG"
     },
     correctAnswers: {
         "A": ["C"],
@@ -125,9 +125,9 @@ export const question8 = {
         "C": "Twee treinen botsen op elkaar door een ruzie tussen de machinisten."
     },
     matchItems: {
-        "A": "/src/images/landen/indonesia.PNG",
-        "B": "/src/images/landen/amerika.PNG",
-        "C": "/src/images/landen/egypte.PNG"
+        "A": "src/images/landen/indonesia.PNG",
+        "B": "src/images/landen/amerika.PNG",
+        "C": "src/images/landen/egypte.PNG"
     },
     correctAnswers: {
         "A": ["B"],
@@ -146,9 +146,9 @@ export const question9 = {
         "C": "Spectaculaire uitbarsting: vulkaan spuwt opnieuw lava."
     },
     matchItems: {
-        "A": "/src/images/vlaggen/guatemalaplusnaam.PNG",
-        "B": "/src/images/vlaggen/mexicoplusnaam.PNG",
-        "C": "/src/images/vlaggen/amerikaplusnaam.PNG"
+        "A": "src/images/vlaggen/guatemalaplusnaam.PNG",
+        "B": "src/images/vlaggen/mexicoplusnaam.PNG",
+        "C": "src/images/vlaggen/amerikaplusnaam.PNG"
     },
     correctAnswers: {
         "A": ["B"],
@@ -195,10 +195,10 @@ export const question2 = {
         "D": "Catan"
     },
     matchItems: {
-        "A": "/src/images/pokemon2.jpg",
-        "B": "/src/images/catan2.jpg",
-        "C": "/src/images/odyssee2.jpg",
-        "D": "/src/images/monopoly2.jpg"
+        "A": "src/images/pokemon2.jpg",
+        "B": "src/images/catan2.jpg",
+        "C": "src/images/odyssee2.jpg",
+        "D": "src/images/monopoly2.jpg"
     },
     correctAnswers: {
         "A": ["C"],

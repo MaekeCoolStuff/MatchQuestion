@@ -186,13 +186,13 @@ export class MatchContainer extends PIXI.Sprite {
 
         if (this.matchItem) {
             if (answers[this.questionIdentifier].indexOf(this.matchItem.itemIdentifier) > -1) {
-                let correctImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/krul.png'].texture);
+                let correctImage = new PIXI.Sprite(PIXI.loaders.shared.resources['src/images/krul.png'].texture);
                 correctImage.scale.set(0.5, 0.5);
                 correctImage.x = this.matchQuestion.type === 'ImageToText' ? 615 : 315;
                 correctImage.y = 20;
                 this.box.addChild(correctImage);
             } else {
-                let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/fout.png'].texture);
+                let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['src/images/fout.png'].texture);
                 incorrectImage.scale.set(0.5, 0.5);
                 incorrectImage.x = this.matchQuestion.type === 'ImageToText' ? 615 : 315;
                 incorrectImage.y = 20;
@@ -200,7 +200,7 @@ export class MatchContainer extends PIXI.Sprite {
             }
 
         } else {
-            let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/fout.png'].texture);
+            let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['src/images/fout.png'].texture);
             incorrectImage.scale.set(0.5, 0.5);
             incorrectImage.x = this.matchQuestion.type === 'ImageToText' ? 615 : 315;
             incorrectImage.y = 20;

@@ -23,14 +23,14 @@ let currentQuestionIndex = 0;
 let currentQuestion = questions[0];
 
 PIXI.loaders.shared
-.add("/src/images/catan1.png")
-.add("/src/images/catan2.jpg")
-.add("/src/images/monopoly1.jpeg")
-.add("/src/images/monopoly2.jpg")
-.add("/src/images/odyssee1.jpg")
-.add("/src/images/odyssee2.jpg")
-.add("/src/images/pokemon1.jpg")
-.add("/src/images/pokemon2.jpg")
+.add("src/images/catan1.png")
+.add("src/images/catan2.jpg")
+.add("src/images/monopoly1.jpeg")
+.add("src/images/monopoly2.jpg")
+.add("src/images/odyssee1.jpg")
+.add("src/images/odyssee2.jpg")
+.add("src/images/pokemon1.jpg")
+.add("src/images/pokemon2.jpg")
 .load(() => {
     gameLoop();
 })
@@ -79,8 +79,8 @@ function inQuestionState() {
         if (currentQuestion.type === 'ImageToText') {
             let loader = PIXI.loaders.shared;
             loader.reset();
-            loader.add('/src/images/krul.png');
-            loader.add('/src/images/fout.png');
+            loader.add('src/images/krul.png');
+            loader.add('src/images/fout.png');
             for (let key in currentQuestion.matchItems) {
                 if (currentQuestion.matchItems.hasOwnProperty(key)) {
                     loader.add(currentQuestion.matchItems[key]);
@@ -97,8 +97,8 @@ function inQuestionState() {
         } else {
             let loader = PIXI.loaders.shared;
             loader.reset();
-            loader.add('/src/images/krul.png');
-            loader.add('/src/images/fout.png');
+            loader.add('src/images/krul.png');
+            loader.add('src/images/fout.png');
 
             loader.load(() => {
                 new MatchQuestionView(stage, app.renderer, currentQuestion, () => {
