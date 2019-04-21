@@ -37,9 +37,9 @@ export const question4 = {
         "C": "Glenn is een Indische jongen die in Nederland woont. Hij heeft zich volledig aangepast aan de Nederlandse cultuur en spreekt daarom de taal van zijn land van herkomst nooit meer."
     },
     correctAnswers: {
-        "A": ["B"],
-        "B": ["C"],
-        "C": ["A"]
+        "A": ["C"],
+        "B": ["A"],
+        "C": ["B"]
     }
 }
 

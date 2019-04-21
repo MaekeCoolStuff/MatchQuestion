@@ -56,7 +56,7 @@ export class MatchItemContainer extends PIXI.Sprite {
         super.addChild(this.matchItem);
     }
 
-    public setMatchItem(matchItem: MatchItem) {
+    public setMatchItem(matchItem: MatchItem) {        
         let heightOfMatchItem = matchItem['height'];
 
         let newHeight = heightOfMatchItem + 60;
@@ -69,7 +69,9 @@ export class MatchItemContainer extends PIXI.Sprite {
         matchItem['pivot'].set(0, 0);
 
 
+        
         this.matchItem = matchItem;
+        matchItem.container = this;
         this.box.addChild(matchItem);
         this.alpha = 1;
     }

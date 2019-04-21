@@ -8,6 +8,8 @@ export class MatchItem extends Sprite {
     public data: any;
     public dragging: boolean;
     public container: MatchItemContainer | MatchContainer;
+    public rightPosition: Graphics;
+    public rightPositionNumber: number;
 
     constructor(public text: string, public itemIdentifier: string, public stage, public matchQuestion: MatchQuestion) {
         super();
@@ -72,9 +74,43 @@ export class MatchItem extends Sprite {
             });
             message.x = 20;
             message.y = 10;
+
             this['addChild'](message);
         }
 
+        this.rightPosition = new Graphics();
+        this.rightPosition.beginFill(0xffd356);
+        this.rightPosition.drawRect(0, 0, 120, 30);
+        this.rightPosition.endFill();
+
+        let n = 1;
+
+        for (let key in this.matchQuestion.question.correctAnswers) {
+            if (this.matchQuestion.question.correctAnswers.hasOwnProperty(key)) {
+                if(this.matchQuestion.question.correctAnswers[key].indexOf(this.itemIdentifier) > -1) {
+                    break;
+                } else {
+                    n++;
+                }
+            }
+        }
+
+        let rightPositionText = new PIXI.Text('Juiste positie: ' + n, {
+            fontSize:14,
+            fontVariant: 'bold'
+        });
+        rightPositionText.x = (this.rightPosition.width - rightPositionText.width) / 2;
+        rightPositionText.y = (this.rightPosition.height - rightPositionText.height) / 2;
+        this.rightPosition.addChild(rightPositionText);
+        if(this.matchQuestion.type === 'ImageToText') {
+            this.rightPosition.x = g.width - this.rightPosition.width - 60;
+        } else {
+            this.rightPosition.x = g.width - this.rightPosition.width - 10;
+        }        
+        this.rightPosition.y = g.height - this.rightPosition.height - 10;
+        this.rightPosition.alpha = 0;
+
+        this['addChild'](this.rightPosition);
 
         this['interactive'] = true;
         this['buttonMode'] = true;
@@ -128,6 +164,19 @@ export class MatchItem extends Sprite {
             this['position'].x = newPosition.x;
             this['position'].y = newPosition.y;
             this.matchQuestion.checkForContainerCollisions(newPosition.x, newPosition.y, this, false);
+        }
+    }
+
+    public validate() {
+        let correctAnswers = this.matchQuestion.question.correctAnswers;
+        if(this.container && this.container['questionIdentifier']) {
+            if(correctAnswers[this.container['questionIdentifier']].indexOf(this.itemIdentifier) > -1) {
+
+            } else {
+                this.rightPosition.alpha = 1;
+            }
+        } else {
+            this.rightPosition.alpha = 1;
         }
     }
 }

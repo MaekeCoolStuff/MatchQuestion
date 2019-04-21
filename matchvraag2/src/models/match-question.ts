@@ -9,6 +9,7 @@ import { MatchQuestionView } from "../views/match-question-view";
 export class MatchQuestion {
     public matchContainers: MatchContainer[] = [];
     public matchItemContainers: MatchItemContainer[] = [];
+    public matchItems: MatchItem[] = [];
     public type: string;
     public questionLocked: boolean = false;
 
@@ -45,6 +46,7 @@ export class MatchQuestion {
                 let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem, this);
                 matchItemContainer.matchItem = matchItem;
                 matchItem.container = matchItemContainer;
+                this.matchItems.push(matchItem);
                 this.matchItemContainers.push(matchItemContainer);
                 stage.addChild(matchItemContainer);
                 matchItemContainerY += matchYIncrement;
@@ -88,6 +90,9 @@ export class MatchQuestion {
         this.questionLocked = true;
         this.matchContainers.forEach(c => {
             c.validate();
+        });
+        this.matchItems.forEach(mi => {
+            mi.validate();
         });
     }
 }

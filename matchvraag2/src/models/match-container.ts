@@ -143,6 +143,16 @@ export class MatchContainer extends PIXI.Sprite {
         matchItem['x'] = 0;
         matchItem['y'] = 40;
         matchItem['pivot'].set(0, 0);
+        if(this.matchItem) {
+            for(let mic = 0; mic < this.matchQuestion.matchItemContainers.length; mic++) {
+                let matchItemContainer = this.matchQuestion.matchItemContainers[mic];
+                if(!matchItemContainer.matchItem) {
+                    matchItemContainer.setMatchItem(this.matchItem);
+                    break;
+                }
+            }
+        }
+        matchItem.container.matchItem = null;
         matchItem.container = this;
         this.matchItem = matchItem;
         if (this.matchQuestion.type === 'ImageToText') {
