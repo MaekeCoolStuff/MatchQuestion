@@ -79,6 +79,8 @@ function inQuestionState() {
         if (currentQuestion.type === 'ImageToText') {
             let loader = PIXI.loaders.shared;
             loader.reset();
+            loader.add('/src/images/krul.png');
+            loader.add('/src/images/fout.png');
             for (let key in currentQuestion.matchItems) {
                 if (currentQuestion.matchItems.hasOwnProperty(key)) {
                     loader.add(currentQuestion.matchItems[key]);
@@ -93,10 +95,17 @@ function inQuestionState() {
                 });
             });
         } else {
-            new MatchQuestionView(stage, app.renderer, currentQuestion, () => {
-                clearStage();
-                stateInitialized = false;
-                state = menuState;
+            let loader = PIXI.loaders.shared;
+            loader.reset();
+            loader.add('/src/images/krul.png');
+            loader.add('/src/images/fout.png');
+
+            loader.load(() => {
+                new MatchQuestionView(stage, app.renderer, currentQuestion, () => {
+                    clearStage();
+                    stateInitialized = false;
+                    state = menuState;
+                });
             });
         }
     }

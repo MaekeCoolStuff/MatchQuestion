@@ -87,7 +87,7 @@ export const question6 = {
         "A": ["C"],
         "B": ["B"],
         "C": ["D"],
-        "D": ["C"]
+        "D": ["A"]
     }
 }
 

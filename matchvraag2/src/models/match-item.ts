@@ -50,7 +50,6 @@ export class MatchItem extends Sprite {
             image.x = 5;
             image.y = 5;
             let longestSide = image.width > image.height ? 'width' : 'height';
-            let newHeight = 0;
             if(longestSide === 'width') {
                 change = image.width / 290;
                 let newHeight = image.height / change;
@@ -62,14 +61,6 @@ export class MatchItem extends Sprite {
             }
 
             image.width = 290;
-            // let ratio = 1;
-            // if (longestSide === 'width') {
-            //     ratio = image.width / image.height;
-            // } else {
-            //     ratio = image.height / image.width;
-            // }
-            //
-            // image.scale.set(0.5, 0.5);
 
             this['addChild'](image);
         } else {

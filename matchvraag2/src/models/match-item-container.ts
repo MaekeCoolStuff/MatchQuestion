@@ -22,13 +22,32 @@ export class MatchItemContainer extends PIXI.Sprite {
     public setupGraphics() {
         this.box = new PIXI.Graphics();
         if (this.matchQuestion.type === 'ImageToText') {
-            this.box.opacity = 0;
-            this.box.drawRect(0, 0, 300, 150);
+            let polygons = [];
+            polygons.push({x: 0, y: 0});
+            polygons.push({x: 300, y: 1});
+            polygons.push({x: 300, y: 148});
+            polygons.push({x: 0, y: 148});
+            polygons.push({x: 0, y: 125});
+            polygons.push({x: -50, y: 75});
+            polygons.push({x: 0, y: 25});
+
+            this.box.lineStyle(1, 0x0d4374, 0.7);
+            this.box.drawDashedPolygon(polygons, 0, 0, 0, 10, 5);
+            this.box.endFill();
         } else {
             this.box.beginFill(0xefefef);
-            this.box.drawRect(0, 0, 300, 140);
+            //this.box.drawRect(0, 0, 300, 140);
+            let polygons = [];
+            polygons.push({x: 0, y: 0});
+            polygons.push({x: 300, y: 0});
+            polygons.push({x: 300, y: 140});
+            polygons.push({x: 0, y: 140});
+
+            this.box.lineStyle(1, 0x0d4374, 0.7);
+            this.box.drawDashedPolygon(polygons, 0, 0, 0, 10, 5);
+            this.box.endFill();
         }
-        this.box.drawRect(0, 0, 300, 140);
+        //this.box.drawRect(0, 0, 300, 140);
         this.box.endFill();
 
         super.addChild(this.box);

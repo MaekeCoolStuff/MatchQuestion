@@ -109,7 +109,7 @@ export class MatchContainer extends PIXI.Sprite {
 
                 let fontSize = 24;
 
-                if(this.title.length > 50) {
+                if(this.title.length > 40) {
                     fontSize = 16;
                 }
 
@@ -179,32 +179,25 @@ export class MatchContainer extends PIXI.Sprite {
 
         if (this.matchItem) {
             if (answers[this.questionIdentifier].indexOf(this.matchItem.itemIdentifier) > -1) {
-                let correct = new PIXI.Text('Juist', {
-                    fill: 0x16dd48
-                });
-                correct.x = 240;
-                correct.y = 140;
-                this.validateTexts.push(correct);
-                super.addChild(correct);
+                let correctImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/krul.png'].texture);
+                correctImage.scale.set(0.5, 0.5);
+                correctImage.x = this.matchQuestion.type === 'ImageToText' ? 615 : 315;
+                correctImage.y = 20;
+                this.box.addChild(correctImage);
             } else {
-                let incorrect = new PIXI.Text('Onjuist', {
-                    fill: 0xdd5c16
-                });
-                incorrect.x = 210;
-                incorrect.y = 140;
-                this.validateTexts.push(incorrect);
-                super.addChild(incorrect);
+                let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/fout.png'].texture);
+                incorrectImage.scale.set(0.5, 0.5);
+                incorrectImage.x = 615;
+                incorrectImage.y = 20;
+                this.box.addChild(incorrectImage);
             }
 
         } else {
-            let incorrect = new PIXI.Text('Onjuist',
-                {
-                    fill: 0xdd5c16
-                });
-            incorrect.x = 210;
-            incorrect.y = 100;
-            this.validateTexts.push((incorrect));
-            super.addChild(incorrect);
+            let incorrectImage = new PIXI.Sprite(PIXI.loaders.shared.resources['/src/images/fout.png'].texture);
+            incorrectImage.scale.set(0.5, 0.5);
+            incorrectImage.x = 615;
+            incorrectImage.y = 20;
+            this.box.addChild(incorrectImage);
         }
     }
 }
