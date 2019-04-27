@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { MenuView } from './views/menu-view';
 import { MatchQuestionView } from './views/match-question-view';
-import { question3, question2, question4, question5, question6, question7, question8, question9 } from './data/question';
+import { question3, question2, question4, question5, question6, question7, question8, question9, question10 } from './data/question';
 import { scaleToWindow } from './utils/scaleToWindow';
 
 const app = new PIXI.Application(1024, 900, {
@@ -54,6 +54,17 @@ const menuItems = [
             currentQuestionIndex = 0;
             questions = [question6, question7, question8, question9];
             currentQuestion = question6;
+            state = inQuestionState;
+        }
+    },
+    {
+        title: 'Meerdere items matchen',
+        callback: () => {
+            clearStage();
+            stateInitialized = false;
+            currentQuestionIndex = 0;
+            questions = [question10];
+            currentQuestion = questions[currentQuestionIndex];
             state = inQuestionState;
         }
     }

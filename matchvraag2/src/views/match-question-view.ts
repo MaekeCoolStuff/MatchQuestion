@@ -16,7 +16,7 @@ export class MatchQuestionView extends PIXI.Container {
         scroll(0,0);
         this.matchQuestion = new MatchQuestion(this.question, this.stage, this);
         let headerWidth = 725; 
-        if (this.matchQuestion.type === 'ImageToText') {
+        if (this.matchQuestion.type === 'ImageToText' || this.matchQuestion.question.variant === 'ManyTooMany') {
             this.renderer.resize(1200, 2000);
             headerWidth = 1075;
         }
@@ -48,7 +48,7 @@ export class MatchQuestionView extends PIXI.Container {
         button.interactive = true;
         button.buttonMode = true;
 
-        if (this.question.type === 'ImageToText') {
+        if (this.question.type === 'ImageToText' || this.question.variant === 'ManyTooMany') {
             button.x = 460;
             button.y = 850;
         } else {
@@ -94,7 +94,7 @@ export class MatchQuestionView extends PIXI.Container {
         button2.endFill();
         button2.interactive = true;
         button2.buttonMode = true;
-        if (this.question.type === 'ImageToText') {
+        if (this.question.type === 'ImageToText'  || this.question.variant === 'ManyTooMany') {
             button2.x = 20;
             button2.y = 850;
         } else {
@@ -124,7 +124,7 @@ export class MatchQuestionView extends PIXI.Container {
         button3.endFill();
         button3.interactive = true;
         button3.buttonMode = true;
-        if (this.question.type === 'ImageToText') {
+        if (this.question.type === 'ImageToText'  || this.question.variant === 'ManyTooMany') {
             button3.x = 240;
             button3.y = 850;
         } else {

@@ -152,7 +152,10 @@ export class MatchContainer extends PIXI.Sprite {
                 }
             }
         }
-        matchItem.container.matchItem = null;
+        if (this.matchQuestion.question.variant !== 'ManyTooMany') {
+            matchItem.container.matchItem = null;
+        }
+        
         matchItem.container = this;
         this.matchItem = matchItem;
         if (this.matchQuestion.type === 'ImageToText') {

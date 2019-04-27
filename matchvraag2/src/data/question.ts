@@ -208,6 +208,42 @@ export const question2 = {
     }
 }
 
+export const question10 = {
+    type: 'TextToText',
+    variant: 'ManyTooMany',
+    htmlFragment: '',
+    matchContainers: {
+        'A': 'Getallen',
+        'B': 'Letters',
+        'C': 'Kleuren',
+        'D': 'Dieren'
+    },
+    matchItems: {
+        'A': 'eend',
+        'B': '3',
+        'C': 'geel',
+        'D': 'koe',
+        'E': 'blauw',
+        'F': '5',
+        'G': 'A',
+        'H': 'zeven',
+        'I': 'walvis',
+        'J': 'L',
+        'K': 'groen',
+        'L': 'kat',
+        'M': 'M',
+        'N': 'turquoise',
+        'O': 'T',
+        'P': 'MMXIX'
+    },
+    correctAnswers: {
+        'A': ['B', 'F', 'H', 'P'],
+        'B': ['G', 'J', 'M', 'O'],
+        'C': ['C', 'E', 'K', 'N'],
+        'D': ['A', 'D', 'I', 'L']
+    }
+}
+
 export interface IQuestionVO {
     type: string;
     variant: string;

@@ -3,6 +3,7 @@ import { MatchItemContainer } from "./match-item-container";
 import { MatchContainer } from "./match-container";
 import { MatchQuestion } from "./match-question";
 import * as PIXI from 'pixi.js';
+import { MultipleMatchItemContainer } from "./multiple-match-item-container";
 
 export class MatchItem extends Sprite {
     public data: any;
@@ -25,6 +26,9 @@ export class MatchItem extends Sprite {
         if (this.matchQuestion.type === 'ImageToText') {
             g.beginFill(0x397cc6);
             g.drawRect(0, 0, 300, 150);
+        } else if (this.matchQuestion.question.variant === 'ManyTooMany') {
+            g.beginFill(0xefefef);
+            g.drawRect(0, 0, 220, 70);
         } else {
             g.beginFill(0xefefef);
             g.drawRect(0, 0, 300, 140);

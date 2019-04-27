@@ -5,6 +5,7 @@ import { MatchItem } from "./match-item";
 import { MatchContainer } from "./match-container";
 import * as PIXI from 'pixi.js';
 import { MatchQuestionView } from "../views/match-question-view";
+import { MultipleMatchItemContainer } from "./multiple-match-item-container";
 
 export class MatchQuestion {
     public matchContainers: MatchContainer[] = [];
@@ -20,37 +21,54 @@ export class MatchQuestion {
     public initQuestion(question: IQuestionVO, stage) {
         this.type = question.type;
         let matchContainerY = 80;
+        let matchContainerX = 20;
+        let matchXIncrement = 0;
         let matchYIncrement = 200;
         if (this.type === 'ImageToText') {
             matchYIncrement = 200;
+        } else if (question.variant === 'ManyTooMany') {
+            matchYIncrement = 0;
+            matchXIncrement = 320;
         }
 
         for (let key in question.matchContainers) {
             if (question.matchContainers.hasOwnProperty(key)) {
-                let matchContainer = new MatchContainer(question.matchContainers[key], key, 20, matchContainerY, this);
+                let matchContainer = new MatchContainer(question.matchContainers[key], key, matchContainerX, matchContainerY, this);
                 this.matchContainers.push(matchContainer);
                 stage.addChild(matchContainer);
                 matchContainerY += matchYIncrement;
+                matchContainerX += matchXIncrement;
             }
         }
 
-        let matchItemContainerX = 400;
-        if (this.question.type === 'ImageToText') {
-           matchItemContainerX = 750;
-        }
-        let matchItemContainerY = 80;
-
-        for (let key in question.matchItems) {
-            if (question.matchItems.hasOwnProperty(key)) {
-                let matchItem = new MatchItem(question.matchItems[key], key, stage, this);
-                let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem, this);
-                matchItemContainer.matchItem = matchItem;
-                matchItem.container = matchItemContainer;
-                this.matchItems.push(matchItem);
-                this.matchItemContainers.push(matchItemContainer);
-                stage.addChild(matchItemContainer);
-                matchItemContainerY += matchYIncrement;
+        if(question.variant !== 'ManyTooMany') {
+            let matchItemContainerX = 400;
+            if (this.question.type === 'ImageToText') {
+               matchItemContainerX = 750;
             }
+            let matchItemContainerY = 80;
+    
+            for (let key in question.matchItems) {
+                if (question.matchItems.hasOwnProperty(key)) {
+                    let matchItem = new MatchItem(question.matchItems[key], key, stage, this);
+                    let matchItemContainer = new MatchItemContainer(matchItemContainerX, matchItemContainerY, matchItem, this);
+                    matchItemContainer.matchItem = matchItem;
+                    matchItem.container = matchItemContainer;
+                    this.matchItems.push(matchItem);
+                    this.matchItemContainers.push(matchItemContainer);
+                    stage.addChild(matchItemContainer);
+                    matchItemContainerY += matchYIncrement;
+                }
+            }
+        } else {
+            for (let key in question.matchItems) {
+                if (question.matchItems.hasOwnProperty(key)) {
+                    let matchItem = new MatchItem(question.matchItems[key], key, stage, this);
+                    this.matchItems.push(matchItem);
+                }
+            }
+            let multipleMatchItemContainer = new MultipleMatchItemContainer(0, 0, this, this.matchItems);
+            this.stage.addChild(multipleMatchItemContainer);
         }
     }
 
