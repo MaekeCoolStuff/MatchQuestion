@@ -2,10 +2,12 @@ import { Sprite, Graphics, Text } from "pixi.js";
 import { MatchItem } from "./match-item";
 import { MatchQuestion } from "./match-question";
 import * as PIXI from 'pixi.js';
+import { MatchItemContainer } from "./match-item-container";
 
 export class MultipleMatchItemContainer extends PIXI.Sprite {
 
     public box;
+    public matchItemContainers: any[] = [];
 
     constructor(public x: number, public y: number, public matchQuestion: MatchQuestion, public matchItems: MatchItem[]) {
         super();
@@ -38,34 +40,23 @@ export class MultipleMatchItemContainer extends PIXI.Sprite {
             let positionX = 20;
             let positionXIncrement = 230;
             for(let j = 0; j < 4; j++) {
-                let matchItemContainer = new PIXI.Graphics();
-                // matchItemContainer.beginFill(0xEFEFEF);
-                // matchItemContainer.drawRect(0, 0, 220, 70);
+                let matchItem = this.matchItems[i * 4 + j];
+                let matchItemContainer = new MatchItemContainer(positionX, positionY, matchItem, this.matchQuestion);
+                this.matchQuestion.matchItemContainers.push(matchItemContainer);
+                matchItem.container = matchItemContainer;
+                this.matchItemContainers.push(matchItemContainer);
                 
-                let polygons = [];
-                polygons.push({x: 0, y: 0});
-                polygons.push({x: 220, y: 0});
-                polygons.push({x: 220, y: 70});
-                polygons.push({x: 0, y: 70});
-    
-                matchItemContainer.lineStyle(1, 0x0d4374, 0.7);
-                matchItemContainer['drawDashedPolygon'](polygons, 0, 0, 0, 10, 5);
-                matchItemContainer.endFill();
-
-                matchItemContainer.addChild(this.matchItems[i * 4 + j]);
-                matchItemContainer.x = positionX;
-                matchItemContainer.y = positionY;
                 this.box.addChild(matchItemContainer);
+
                 positionX += positionXIncrement;
             }
             positionX = 20;
             positionY += positionYIncrement;
-            console.log('Y', positionY);
         }
     }
 
     public setMatchItem(matchItem: MatchItem) {        
-
+        alert('set match Item');
     }
 
     public setHoverState() {

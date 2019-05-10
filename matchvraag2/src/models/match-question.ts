@@ -6,6 +6,7 @@ import { MatchContainer } from "./match-container";
 import * as PIXI from 'pixi.js';
 import { MatchQuestionView } from "../views/match-question-view";
 import { MultipleMatchItemContainer } from "./multiple-match-item-container";
+import { MultipleMatchContainer } from "./multiple-match-container";
 
 export class MatchQuestion {
     public matchContainers: MatchContainer[] = [];
@@ -28,14 +29,19 @@ export class MatchQuestion {
             matchYIncrement = 200;
         } else if (question.variant === 'ManyTooMany') {
             matchYIncrement = 0;
-            matchXIncrement = 320;
+            matchXIncrement = 240;
         }
 
         for (let key in question.matchContainers) {
             if (question.matchContainers.hasOwnProperty(key)) {
-                let matchContainer = new MatchContainer(question.matchContainers[key], key, matchContainerX, matchContainerY, this);
-                this.matchContainers.push(matchContainer);
-                stage.addChild(matchContainer);
+                if(this.question.variant === 'ManyTooMany') {
+                    let multipleMatchContainer = new MultipleMatchContainer(question.matchContainers[key], key, matchContainerX, matchContainerY, this);
+                    stage.addChild(multipleMatchContainer);
+                } else {
+                    let matchContainer = new MatchContainer(question.matchContainers[key], key, matchContainerX, matchContainerY, this);
+                    this.matchContainers.push(matchContainer);
+                    stage.addChild(matchContainer);
+                }
                 matchContainerY += matchYIncrement;
                 matchContainerX += matchXIncrement;
             }

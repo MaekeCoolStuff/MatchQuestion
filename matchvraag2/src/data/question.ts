@@ -211,7 +211,7 @@ export const question2 = {
 export const question10 = {
     type: 'TextToText',
     variant: 'ManyTooMany',
-    htmlFragment: '',
+    htmlFragment: 'Sleep onderstaande items naar de juiste definitie. Er kunnen meerdere items aan een definitie hangen.',
     matchContainers: {
         'A': 'Getallen',
         'B': 'Letters',

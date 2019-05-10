@@ -30,15 +30,19 @@ export class MatchContainer extends PIXI.Sprite {
     public setupGraphics() {
         switch (this.matchQuestion.type) {
             case 'TextToText':
+                let boxWidth = 300;
+                if(this.matchQuestion.question.variant === 'ManyTooMany') {
+                    boxWidth = 220;
+                }
                 this.box = new PIXI.Graphics();
                 this.box.beginFill(0xefefef);
-                this.box.drawRect(0, 0, 300, 140);
+                this.box.drawRect(0, 0, boxWidth, 140);
                 this.box.endFill();
                 this.interactive = true;
 
                 let title = new PIXI.Graphics();
                 title.beginFill(0x0d4374);
-                title.drawRect(0, 0, 300, 40);
+                title.drawRect(0, 0, boxWidth, 40);
                 title.endFill();
 
 
@@ -153,7 +157,7 @@ export class MatchContainer extends PIXI.Sprite {
             }
         }
         if (this.matchQuestion.question.variant !== 'ManyTooMany') {
-            matchItem.container.matchItem = null;
+            matchItem.container = null;
         }
         
         matchItem.container = this;

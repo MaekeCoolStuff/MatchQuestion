@@ -34,6 +34,19 @@ export class MatchItemContainer extends PIXI.Sprite {
             this.box.lineStyle(1, 0x0d4374, 0.7);
             this.box.drawDashedPolygon(polygons, 0, 0, 0, 10, 5);
             this.box.endFill();
+        } else if(this.matchQuestion.question.variant === 'ManyTooMany') {
+                this.box.beginFill(0xEFEFEF);
+                this.box.drawRect(0, 0, 220, 70);
+                
+                let polygons = [];
+                polygons.push({x: 0, y: 0});
+                polygons.push({x: 220, y: 0});
+                polygons.push({x: 220, y: 70});
+                polygons.push({x: 0, y: 70});
+    
+                this.box.lineStyle(1, 0x0d4374, 0.7);
+                this.box['drawDashedPolygon'](polygons, 0, 0, 0, 10, 5);
+                this.box.endFill();
         } else {
             this.box.beginFill(0xefefef);
             //this.box.drawRect(0, 0, 300, 140);
