@@ -7,13 +7,17 @@ import * as PIXI from 'pixi.js';
 import { MatchQuestionView } from "../views/match-question-view";
 import { MultipleMatchItemContainer } from "./multiple-match-item-container";
 import { MultipleMatchContainer } from "./multiple-match-container";
+import { MultipleMatchSubContainer } from "./multiple-match-sub-container";
 
 export class MatchQuestion {
     public matchContainers: MatchContainer[] = [];
     public matchItemContainers: MatchItemContainer[] = [];
+    public multipleMatchContainers: MultipleMatchContainer[] = [];
+    public matchSubContainers: MultipleMatchSubContainer[] = [];
     public matchItems: MatchItem[] = [];
     public type: string;
     public questionLocked: boolean = false;
+    public multipleMatchItemContainer: MultipleMatchItemContainer;
 
     constructor(public question: IQuestionVO, public stage, public view: MatchQuestionView) {
         this.initQuestion(question, stage);
@@ -36,6 +40,7 @@ export class MatchQuestion {
             if (question.matchContainers.hasOwnProperty(key)) {
                 if(this.question.variant === 'ManyTooMany') {
                     let multipleMatchContainer = new MultipleMatchContainer(question.matchContainers[key], key, matchContainerX, matchContainerY, this);
+                    this.multipleMatchContainers.push(multipleMatchContainer);
                     stage.addChild(multipleMatchContainer);
                 } else {
                     let matchContainer = new MatchContainer(question.matchContainers[key], key, matchContainerX, matchContainerY, this);
@@ -73,16 +78,16 @@ export class MatchQuestion {
                     this.matchItems.push(matchItem);
                 }
             }
-            let multipleMatchItemContainer = new MultipleMatchItemContainer(0, 0, this, this.matchItems);
-            this.stage.addChild(multipleMatchItemContainer);
+            this.multipleMatchItemContainer = new MultipleMatchItemContainer(0, 0, this, this.matchItems);
+            this.stage.addChild(this.multipleMatchItemContainer);
         }
     }
 
     public checkForContainerCollisions(x: number, y: number, matchItem: MatchItem, dragEnd: boolean): boolean {
         let hasCollisions: boolean = false;
         let allContainersToCheck: any[] = <any[]>this.matchContainers
-            .concat(<any[]>this.matchItemContainers);
-
+            .concat(<any[]>this.matchItemContainers)
+            .concat(<any[]>this.matchSubContainers);
         allContainersToCheck.forEach(c => {
             let isInDropzone = c.getBounds().contains(x, y);
             if (isInDropzone) {

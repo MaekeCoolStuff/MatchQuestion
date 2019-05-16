@@ -4,11 +4,12 @@ import { MatchContainer } from "./match-container";
 import { MatchQuestion } from "./match-question";
 import * as PIXI from 'pixi.js';
 import { MultipleMatchItemContainer } from "./multiple-match-item-container";
+import { MultipleMatchSubContainer } from "./multiple-match-sub-container";
 
 export class MatchItem extends Sprite {
     public data: any;
     public dragging: boolean;
-    public container: MatchItemContainer | MatchContainer;
+    public container: MatchItemContainer | MatchContainer | MultipleMatchSubContainer;
     public rightPosition: Graphics;
     public rightPositionNumber: number;
 
@@ -27,7 +28,7 @@ export class MatchItem extends Sprite {
             g.beginFill(0x397cc6);
             g.drawRect(0, 0, 300, 150);
         } else if (this.matchQuestion.question.variant === 'ManyTooMany') {
-            g.beginFill(0xefefef);
+            g.beginFill(0x397cc6);
             g.drawRect(0, 0, 220, 70);
         } else {
             g.beginFill(0xefefef);
@@ -70,8 +71,12 @@ export class MatchItem extends Sprite {
 
             this['addChild'](image);
         } else {
+            let textColor = '0x565656';
+            if(this.matchQuestion.question.variant === 'ManyTooMany') {
+                textColor = '0xffffff';
+            }
             let message = new PIXI.Text(this.text, {
-                fill: '0x565656',
+                fill: textColor,
                 fontSize: 16,
                 wordWrap: true,
                 wordWrapWidth: 270

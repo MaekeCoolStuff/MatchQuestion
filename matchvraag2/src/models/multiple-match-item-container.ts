@@ -23,12 +23,23 @@ export class MultipleMatchItemContainer extends PIXI.Sprite {
 
     public setupGraphics() {
 
+        let lineAbove = new PIXI.Graphics();
+        lineAbove.beginFill(0xefefef);
+        lineAbove.drawRect(0, 0, 1075, 5);
+        lineAbove.endFill();
+
+        lineAbove.y = 0;
+        lineAbove.x = -20;
+        
+
         let numberOfMatchItems = 16;
         let numberOfRows = numberOfMatchItems / 4;
 
         this.box = new PIXI.Graphics();
         this.box.x = 20;
-        this.box.y = 300;
+        this.box.y = 320;
+
+        this.box.addChild(lineAbove);
 
         this['addChild'](this.box);
 
