@@ -98,7 +98,7 @@ export class MatchQuestion {
             }
             let image = new PIXI.Sprite(PIXI.loaders.shared.resources[imageUrl].texture);
             this.fullSizeImage = new PIXI.Graphics();
-            this.fullSizeImage.beginFill(0x397cc6);
+            this.fullSizeImage.beginFill(0xffd356); //0x397cc6
             this.fullSizeImage.drawRect(0, 0, image.width + 40, image.height + 60);
             this.fullSizeImage.addChild(image);
             this.fullSizeImage.x = (this.stage.width - this.fullSizeImage.width) / 2;
@@ -110,9 +110,9 @@ export class MatchQuestion {
             let cancel = new PIXI.Text('X', {
                 fontSize: 24,
                 fontWeight: 'bold',
-                fill: 0xffffff
+                //fill: 0xffffff
             });
-            cancel.x = 446;
+            cancel.x = this.fullSizeImage.width - 35;
             cancel.y = 5;
             cancel.interactive = true;
             cancel.buttonMode = true;
