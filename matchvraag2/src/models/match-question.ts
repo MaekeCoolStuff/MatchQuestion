@@ -18,6 +18,8 @@ export class MatchQuestion {
     public type: string;
     public questionLocked: boolean = false;
     public multipleMatchItemContainer: MultipleMatchItemContainer;
+    public fullSizeImage = null;
+    public fullSizeImageUrl = '';
 
     constructor(public question: IQuestionVO, public stage, public view: MatchQuestionView) {
         this.initQuestion(question, stage);
@@ -80,6 +82,53 @@ export class MatchQuestion {
             }
             this.multipleMatchItemContainer = new MultipleMatchItemContainer(0, 0, this, this.matchItems);
             this.stage.addChild(this.multipleMatchItemContainer);
+        }
+    }
+
+    public showFullSizeImage(imageUrl: string) {
+        if(this.fullSizeImageUrl === imageUrl) {
+            this.fullSizeImage.destroy();
+            this.fullSizeImage = null;
+            this.fullSizeImageUrl = '';
+        } else {
+            if(this.fullSizeImage) {
+                this.fullSizeImage.destroy();
+                this.fullSizeImage = null;
+                this.fullSizeImageUrl = '';
+            }
+            let image = new PIXI.Sprite(PIXI.loaders.shared.resources[imageUrl].texture);
+            this.fullSizeImage = new PIXI.Graphics();
+            this.fullSizeImage.beginFill(0x397cc6);
+            this.fullSizeImage.drawRect(0, 0, image.width + 40, image.height + 60);
+            this.fullSizeImage.addChild(image);
+            this.fullSizeImage.x = (this.stage.width - this.fullSizeImage.width) / 2;
+            this.fullSizeImage.y = (this.stage.height - this.fullSizeImage.height) / 2;
+
+            image.x = 20;
+            image.y = 40;
+
+            let cancel = new PIXI.Text('X', {
+                fontSize: 24,
+                fontWeight: 'bold',
+                fill: 0xffffff
+            });
+            cancel.x = 446;
+            cancel.y = 5;
+            cancel.interactive = true;
+            cancel.buttonMode = true;
+            cancel.on('mouseover', () => {
+                cancel.alpha = 0.4;
+            });
+            cancel.on('mouseout', () => {
+                cancel.alpha = 1;
+            });
+            cancel.on('click', () => {
+                this.showFullSizeImage(imageUrl);
+            });
+
+            this.fullSizeImage.addChild(cancel);
+            this.stage.addChild(this.fullSizeImage);
+            this.fullSizeImageUrl = imageUrl;
         }
     }
 

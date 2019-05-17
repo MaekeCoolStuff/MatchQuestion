@@ -70,6 +70,22 @@ export class MatchItem extends Sprite {
             image.width = 290;
 
             this['addChild'](image);
+            let magnifier = new PIXI.Sprite(PIXI.loaders.shared.resources['src/images/vergrootglas.png'].texture);
+            magnifier.width = 25;
+            magnifier.height = 25;
+            magnifier.y = 8;
+            magnifier.x = 265;
+            magnifier.interactive = true;
+            magnifier.on('mouseover', () => {
+                magnifier.alpha = 0.4
+            });
+            magnifier.on('mouseout', () => {
+                magnifier.alpha = 1
+            });
+            magnifier.on('click', () => {
+                this.matchQuestion.showFullSizeImage(this.text);
+            })
+            this['addChild'](magnifier);
         } else {
             let textColor = '0x565656';
             if(this.matchQuestion.question.variant === 'ManyTooMany') {

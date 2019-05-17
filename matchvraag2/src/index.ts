@@ -92,6 +92,7 @@ function inQuestionState() {
             loader.reset();
             loader.add('src/images/krul.png');
             loader.add('src/images/fout.png');
+            loader.add('src/images/vergrootglas.png');
             for (let key in currentQuestion.matchItems) {
                 if (currentQuestion.matchItems.hasOwnProperty(key)) {
                     loader.add(currentQuestion.matchItems[key]);
